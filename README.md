@@ -40,53 +40,88 @@ To use the action, add the following step to your workflow file (for example `.g
 
 The follow options can be provided to this GitHub Action.
 
-### `sessions`
-
-Which nox session(s) to run. If left empty, all sessions marked as default will be run.
-Can be a space-separated list of sessions.
-
-Example: `formatters codeqa`.
-
-**(DEFAULT: `""`)**
-
-### `pythons`
-
-Which version(s) of Python to force. Should be a space-separated list of Python versions.
-
-Example: `3.11 3.12 3.13`.
-
-**(DEFAULT: `""`)**
-
-### `working-directory`
-
-The directory in which all commands should be run.
-
-**(DEFAULT: `.`)**
-
-### `codecov`
-
-Whether code coverage is collected by the session(s) and should be uploaded.
-If set to `true`, the [codecov/codecov-action](https://github.com/codecov/codecov-action) action will be used to upload code coverage.
-
-**(DEFAULT: `false`)**
-
-### `codecov-session`
-
-If a special nox session should be run to collect/analyze code coverage. This is done as an extra step.
-
-**(DEFAULT: `""`)**
-
-### `codecov-name`
-
-If a name should be supplied to codecov. If not specified, will fall back to `sessions`.
-
-**(DEFAULT: `""`)**
-
-### `codecov-token`
-
-Should be provided with the value of `secrets.CODECOV_TOKEN` if `codecov=true`.
-
-**(DEFAULT: `""`)**
+<table>
+  <tr>
+    <th>Option</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>
+      <code>sessions</code>
+      <br>
+      (default:&nbsp;<code>""</code>)
+    </td>
+    <td>
+      Which nox session(s) to run. If left empty, all sessions marked as default will be run.
+      Can be a space-separated list of sessions.
+      <br>
+      Example: <code>formatters codeqa</code>.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>pythons</code>
+      <br>
+      (default:&nbsp;<code>""</code>)
+    </td>
+    <td>
+      Which version(s) of Python to force. Should be a space-separated list of Python versions.
+      <br>
+      Example: <code>3.11 3.12 3.13</code>.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>working-directory</code>
+      <br>
+      (default:&nbsp;<code>.</code>)
+    </td>
+    <td>
+      The directory in which all commands should be run.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>codecov</code>
+      <br>
+      (default:&nbsp;<code>false</code>)
+    </td>
+    <td>
+      Whether code coverage is collected by the session(s) and should be uploaded.
+      If set to <code>true</code>, the <a href="https://github.com/codecov/codecov-action">codecov/codecov-action</a> action will be used to upload code coverage.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>codecov-session</code>
+      <br>
+      (default:&nbsp;<code>""</code>)
+    </td>
+    <td>
+      If a special nox session should be run to collect/analyze code coverage. This is done as an extra step.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>codecov-name</code>
+      <br>
+      (default:&nbsp;<code>""</code>)
+    </td>
+    <td>
+      If a name should be supplied to codecov. If not specified, will fall back to <code>sessions</code>.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>codecov-token</code>
+      <br>
+      (default:&nbsp;<code>""</code>)
+    </td>
+    <td>
+      Should be provided with the value of <code>secrets.CODECOV_TOKEN</code> if <code>codecov=true</code>.
+    </td>
+  </tr>
+</table>
 
 ## License
 
