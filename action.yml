@@ -54,6 +54,14 @@ runs:
       run: >-
         echo "::group::Set up nox environments"
         ;
+        echo "Run:
+        nox -v
+        ${{ (inputs.sessions || inputs.codecov == 'true') && '--sessions ${_ACTION_SESSIONS}' || '' }}
+        ${{ inputs.codecov == 'true' && '${_ACTION_CODECOV_SESSION}' || '' }}
+        ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
+        --install-only
+        "
+        ;
         nox -v
         ${{ (inputs.sessions || inputs.codecov == 'true') && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.codecov == 'true' && '${_ACTION_CODECOV_SESSION}' || '' }}
@@ -68,6 +76,14 @@ runs:
         _ACTION_SESSIONS: ${{ inputs.sessions }}
         _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
       run: >-
+        echo "Run:
+        nox -v
+        ${{ inputs.sessions && '--sessions ${_ACTION_SESSIONS}' || '' }}
+        ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
+        --reuse-existing-virtualenvs
+        --no-install
+        "
+        ;
         nox -v
         ${{ inputs.sessions && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
@@ -81,6 +97,13 @@ runs:
         _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
         _ACTION_CODECOV_SESSION: ${{ inputs.codecov-session }}
       run: >-
+        echo "Run:
+        nox -v -e ${_ACTION_CODECOV_SESSION}
+        ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
+        --reuse-existing-virtualenvs
+        --no-install
+        "
+        ;
         nox -v -e ${_ACTION_CODECOV_SESSION}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --reuse-existing-virtualenvs
