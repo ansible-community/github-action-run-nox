@@ -47,31 +47,42 @@ runs:
   using: composite
   steps:
     - name: Set up nox environments
+      env:
+        _ACTION_SESSIONS: ${{ inputs.sessions }}
+        _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
+        _ACTION_CODECOV_SESSION: ${{ inputs.codecov-session }}
       run: >-
         echo "::group::Set up nox environments"
         ;
         nox -v
-        ${{ inputs.sessions && '--sessions ' || '' }}${{ inputs.sessions }}
-        ${{ inputs.codecov == 'true' && inputs.codecov-session || '' }}
-        ${{ inputs.force-pythons && '--force-python ' || '' }}${{ inputs.force-pythons }}
+        ${{ (inputs.sessions || inputs.codecov == 'true') && '--sessions ${_ACTION_SESSIONS}' || '' }}
+        ${{ inputs.codecov == 'true' && '${_ACTION_CODECOV_SESSION}' || '' }}
+        ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --install-only
         ;
         echo "::endgroup::"
       shell: bash
       working-directory: "${{ inputs.working-directory }}"
     - name: "Run nox -e ${{ matrix.session }}"
+      env:
+        _ACTION_SESSIONS: ${{ inputs.sessions }}
+        _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
       run: >-
         nox -v
-        ${{ inputs.sessions && '--sessions ' || '' }}${{ inputs.sessions }}
-        ${{ inputs.force-pythons && '--force-python ' || '' }}${{ inputs.force-pythons }}
+        ${{ inputs.sessions && '--sessions ${_ACTION_SESSIONS}' || '' }}
+        ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --reuse-existing-virtualenvs
         --no-install
       shell: bash
       working-directory: "${{ inputs.working-directory }}"
     - name: Report coverage
       if: ${{ inputs.codecov == 'true' && inputs.codecov-session }}
+      env:
+        _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
+        _ACTION_CODECOV_SESSION: ${{ inputs.codecov-session }}
       run: >-
-        nox -v -e ${{ inputs.codecov-session }}
+        nox -v -e ${_ACTION_CODECOV_SESSION}
+        ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --reuse-existing-virtualenvs
         --no-install
       shell: bash
