@@ -15,6 +15,12 @@ inputs:
 
       Example: `formatters codeqa`.
     default: ''
+  extra-args:
+    description: |-
+      Extra arguments to be passed to nox sessions. If empty, no extra arguments are passed.
+      Can be a space-separated list of arguments
+
+      Example: `--check`
   force-pythons:
     description: |-
       Which version(s) of Python to force. Should be a space-separated list of Python versions.
@@ -75,13 +81,15 @@ runs:
       env:
         _ACTION_SESSIONS: ${{ inputs.sessions }}
         _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
+        _SESSION_ARGS: ${{ inputs.extra-args }}
       run: >-
         echo "Run:
         nox -v
-        ${{ inputs.sessions && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --reuse-existing-virtualenvs
         --no-install
+        ${{ inputs.sessions  && '--sessions ${_ACTION_SESSIONS}' || '' }}
+        ${{ inputs.extra-args  && '-- ${_SESSION_ARGS}' || '' }}
         "
         ;
         nox -v
