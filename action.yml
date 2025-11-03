@@ -20,7 +20,7 @@ inputs:
       Extra arguments to be passed to nox sessions. If empty, no extra arguments are passed.
       Can be a space-separated list of arguments
 
-      Example: `--check`
+      Example: `--check`.
   force-pythons:
     description: |-
       Which version(s) of Python to force. Should be a space-separated list of Python versions.
