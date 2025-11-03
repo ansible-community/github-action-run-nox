@@ -85,10 +85,10 @@ runs:
       run: >-
         echo "Run:
         nox -v
+        ${{ inputs.sessions  && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --reuse-existing-virtualenvs
         --no-install
-        ${{ inputs.sessions  && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.extra-args  && '-- ${_SESSION_ARGS}' || '' }}
         "
         ;
