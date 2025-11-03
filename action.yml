@@ -18,7 +18,7 @@ inputs:
   extra-args:
     description: |-
       Extra arguments to be passed to nox sessions. If empty, no extra arguments are passed.
-      Can be a space-separated list of arguments
+      Can be a space-separated list of arguments.
 
       Example: `--check`.
   force-pythons:
