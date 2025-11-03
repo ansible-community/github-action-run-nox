@@ -81,15 +81,15 @@ runs:
       env:
         _ACTION_SESSIONS: ${{ inputs.sessions }}
         _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
-        _SESSION_ARGS: ${{ inputs.extra-args }}
+        _ACTION_EXTRA_ARGS: ${{ inputs.extra-args }}
       run: >-
         echo "Run:
         nox -v
-        ${{ inputs.sessions  && '--sessions ${_ACTION_SESSIONS}' || '' }}
+        ${{ inputs.sessions && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --reuse-existing-virtualenvs
         --no-install
-        ${{ inputs.extra-args  && '-- ${_SESSION_ARGS}' || '' }}
+        ${{ inputs.extra-args && '-- ${_ACTION_EXTRA_ARGS}' || '' }}
         "
         ;
         nox -v
