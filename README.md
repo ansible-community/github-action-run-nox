@@ -71,7 +71,7 @@ The follow options can be provided to this GitHub Action.
       (default:&nbsp;<code>""</code>)
     </td>
     <td>
-      Extra arguments to pass to all sessions. If left empty, no additional arguments will be passed
+      Extra arguments to be passed to nox sessions. If empty, no extra arguments are passed. Can be a space-separated list of arguments.
       <br>
       Example: <code>--check</code>.
     </td>
