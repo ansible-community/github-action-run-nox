@@ -66,6 +66,18 @@ The follow options can be provided to this GitHub Action.
   </tr>
   <tr>
     <td>
+      <code>extra-args</code>
+      <br>
+      (default:&nbsp;<code>""</code>)
+    </td>
+    <td>
+      Extra arguments to pass to all sessions. If left empty, no additional arguments will be passed
+      <br>
+      Example: <code>--check</code>.
+    </td>
+  </tr>
+  <tr>
+    <td>
       <code>force-pythons</code>
       <br>
       (default:&nbsp;<code>""</code>)
