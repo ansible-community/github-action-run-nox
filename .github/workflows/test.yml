@@ -1,0 +1,26 @@
+---
+# Copyright (c) 2025 Maxwell G <maxwell@gtmx.me>
+# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)
+# SPDX-License-Identifier: GPL-3.0-or-later
+"on":
+  push:
+  pull_request:
+  workflow_dispatch:
+
+name: Test this action
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test ourselves
+    steps:
+      - uses: actions/checkout@v5
+      # Keep in sync with nox version in the README example
+      - name: Install nox
+        uses: wntrblm/nox@2025.10.16
+
+      - name: Test extra_args
+        uses: ./
+        with:
+          sessions: extra_args
+          working-directory: test
+          extra-args: hello

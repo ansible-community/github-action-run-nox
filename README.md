@@ -24,7 +24,7 @@ To use the action, add the following step to your workflow file (for example `.g
     working-directory: my-code
 
 - name: Install nox
-  uses: wntrblm/nox@2025.02.09
+  uses: wntrblm/nox@2025.10.16
   with:
     python-versions: "3.11, 3.12, 3.13"
 
