@@ -57,6 +57,7 @@ runs:
         _ACTION_SESSIONS: ${{ inputs.sessions }}
         _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
         _ACTION_CODECOV_SESSION: ${{ inputs.codecov-session }}
+        _ACTION_EXTRA_ARGS: ${{ inputs.extra-args }}
       run: >-
         echo "::group::Set up nox environments"
         ;
@@ -66,6 +67,7 @@ runs:
         ${{ inputs.codecov == 'true' && '${_ACTION_CODECOV_SESSION}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --install-only
+        ${{ inputs.extra-args && '-- ${_ACTION_EXTRA_ARGS}' || '' }}
         "
         ;
         nox -v
@@ -73,6 +75,7 @@ runs:
         ${{ inputs.codecov == 'true' && '${_ACTION_CODECOV_SESSION}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --install-only
+        ${{ inputs.extra-args && '-- ${_ACTION_EXTRA_ARGS}' || '' }}
         ;
         echo "::endgroup::"
       shell: bash
@@ -97,6 +100,7 @@ runs:
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
         --reuse-existing-virtualenvs
         --no-install
+        ${{ inputs.extra-args && '-- ${_ACTION_EXTRA_ARGS}' || '' }}
       shell: bash
       working-directory: "${{ inputs.working-directory }}"
     - name: Report coverage
