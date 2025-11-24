@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Test ourselves
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       # Keep in sync with nox version in the README example
       - name: Install nox
         uses: wntrblm/nox@2025.11.12
