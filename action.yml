@@ -124,7 +124,7 @@ runs:
       working-directory: "${{ inputs.working-directory }}"
     - name: Upload coverage
       if: ${{ inputs.codecov == 'true' }}
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@v6
       with:
         name: "${{ inputs.codecov-name || inputs.sessions || '' }}"
         token: "${{ inputs.codecov-token || '' }}"
