@@ -19,7 +19,7 @@ jobs:
         uses: wntrblm/nox@3284968a16fa5bd7fc0cc64a69a531404ccb4756  # 2026.07.11
 
       - name: Test extra_args
-        uses: ./
+        uses: $/
         with:
           sessions: extra_args
           working-directory: test
