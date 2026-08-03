@@ -19,12 +19,12 @@ To use the action, add the following step to your workflow file (for example `.g
 
 ```yaml
 - name: Check out your repository
-  uses: actions/checkout@v4
+  uses: actions/checkout@v7
   with:
     working-directory: my-code
 
 - name: Install nox
-  uses: wntrblm/nox@2026.02.09
+  uses: wntrblm/nox@2026.07.11
   with:
     python-versions: "3.11, 3.12, 3.13"
 
