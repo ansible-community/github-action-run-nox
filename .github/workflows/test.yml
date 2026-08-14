@@ -7,6 +7,9 @@
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 name: Test this action
 jobs:
   test:
@@ -14,6 +17,9 @@ jobs:
     name: Test ourselves
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
       # Keep in sync with nox version in the README example
       - name: Install nox
         uses: wntrblm/nox@3284968a16fa5bd7fc0cc64a69a531404ccb4756  # 2026.07.11
