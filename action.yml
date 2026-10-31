@@ -27,6 +27,11 @@ inputs:
 
       Example: `3.11 3.12 3.13 3.14`.
     default: ''
+  parallel:
+    description: |-
+      Number of sessions to run in parallel.
+      Must be an integer of at least 1 if provided.
+    default: ''
   working-directory:
     description: |-
       The directory in which all commands should be run.
@@ -58,6 +63,7 @@ runs:
         _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
         _ACTION_CODECOV_SESSION: ${{ inputs.codecov-session }}
         _ACTION_EXTRA_ARGS: ${{ inputs.extra-args }}
+        _ACTION_PARALLEL: ${{ inputs.parallel }}
       run: >-
         echo "::group::Set up nox environments"
         ;
@@ -66,6 +72,7 @@ runs:
         ${{ (inputs.sessions || inputs.codecov == 'true') && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.codecov == 'true' && '${_ACTION_CODECOV_SESSION}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
+        ${{ inputs.parallel && '--parallel ${_ACTION_PARALLEL}' || '' }}
         --install-only
         ${{ inputs.extra-args && '-- ${_ACTION_EXTRA_ARGS}' || '' }}
         "
@@ -74,6 +81,7 @@ runs:
         ${{ (inputs.sessions || inputs.codecov == 'true') && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.codecov == 'true' && '${_ACTION_CODECOV_SESSION}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
+        ${{ inputs.parallel && '--parallel ${_ACTION_PARALLEL}' || '' }}
         --install-only
         ${{ inputs.extra-args && '-- ${_ACTION_EXTRA_ARGS}' || '' }}
         ;
@@ -85,11 +93,13 @@ runs:
         _ACTION_SESSIONS: ${{ inputs.sessions }}
         _ACTION_FORCE_PYTHONS: ${{ inputs.force-pythons }}
         _ACTION_EXTRA_ARGS: ${{ inputs.extra-args }}
+        _ACTION_PARALLEL: ${{ inputs.parallel }}
       run: >-
         echo "Run:
         nox -v
         ${{ inputs.sessions && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
+        ${{ inputs.parallel && '--parallel ${_ACTION_PARALLEL}' || '' }}
         --reuse-existing-virtualenvs
         --no-install
         ${{ inputs.extra-args && '-- ${_ACTION_EXTRA_ARGS}' || '' }}
@@ -98,6 +108,7 @@ runs:
         nox -v
         ${{ inputs.sessions && '--sessions ${_ACTION_SESSIONS}' || '' }}
         ${{ inputs.force-pythons && '--force-python ${_ACTION_FORCE_PYTHONS}' || '' }}
+        ${{ inputs.parallel && '--parallel ${_ACTION_PARALLEL}' || '' }}
         --reuse-existing-virtualenvs
         --no-install
         ${{ inputs.extra-args && '-- ${_ACTION_EXTRA_ARGS}' || '' }}

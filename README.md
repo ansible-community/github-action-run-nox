@@ -90,6 +90,17 @@ The follow options can be provided to this GitHub Action.
   </tr>
   <tr>
     <td>
+      <code>parallel</code>
+      <br>
+      (default:&nbsp;<code>""</code>)
+    </td>
+    <td>
+      Number of sessions to run in parallel.
+      Must be an integer of at least 1 if provided.
+    </td>
+  </tr>
+  <tr>
+    <td>
       <code>working-directory</code>
       <br>
       (default:&nbsp;<code>.</code>)
