@@ -24,7 +24,7 @@ To use the action, add the following step to your workflow file (for example `.g
     working-directory: my-code
 
 - name: Install nox
-  uses: wntrblm/nox@2026.07.11
+  uses: wntrblm/nox@2026.10.20
   with:
     python-versions: "3.11, 3.12, 3.13"
 
@@ -86,6 +86,17 @@ The follow options can be provided to this GitHub Action.
       Which version(s) of Python to force. Should be a space-separated list of Python versions.
       <br>
       Example: <code>3.11 3.12 3.13</code>.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>parallel</code>
+      <br>
+      (default:&nbsp;<code>""</code>)
+    </td>
+    <td>
+      Number of sessions to run in parallel.
+      Must be an integer of at least 1 if provided.
     </td>
   </tr>
   <tr>
