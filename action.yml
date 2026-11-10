@@ -30,7 +30,7 @@ inputs:
   parallel:
     description: |-
       Number of sessions to run in parallel.
-      Must be an integer of at least 1 if provided.
+      Must be an integer of at least 1 if provided, or the special value `auto`.
     default: ''
   working-directory:
     description: |-
